@@ -1,0 +1,28 @@
+# Packages that pip installs, run pip install -r requirements.txt
+# torch and pytorch3d are installed separately, so do not add them here
+
+# torch must match the CUDA version and is already installed on Colab
+# https://pytorch.org/get-started/locally/
+
+# pytorch3d is installed once to Google Drive by the Colab notebook
+# https://github.com/facebookresearch/pytorch3d/blob/main/INSTALL.md
+
+# Versions are left unpinned so pip keeps the torch version that PyTorch3D was built for
+
+# Core
+numpy
+pillow
+matplotlib
+tqdm
+pyyaml         # reads config.yaml
+
+# PyTorch3D dependencies
+iopath
+fvcore
+
+# Evaluation metrics
+torchmetrics   # SSIM
+lpips          # LPIPS
+
+# Notebooks
+ipykernel
