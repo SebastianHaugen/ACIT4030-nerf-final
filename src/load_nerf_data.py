@@ -114,15 +114,6 @@ def load_nerf_data(data_dir, split="train", device="cpu", znear=0.01, zfar=10.0,
 
     print(f"Calculated Vertical FOV for camera: {pytorch3d_fov:.3f} degrees")
 
-    # Check for applied_transform
-    applied_transform = None
-    if 'applied_transform' in transforms_data:
-        applied_transform = torch.tensor(
-            np.array(transforms_data['applied_transform'], dtype=np.float32),
-            dtype=torch.float32, device=device
-        )
-        print(f"Found 'applied_transform' in transforms.json. Applying it to camera poses.")
-
     for frame in transforms_data['frames']:
         # Extract file_path from JSON, remove './' if present
         file_path_from_json = frame['file_path'].replace("./", "")
@@ -175,9 +166,6 @@ def load_nerf_data(data_dir, split="train", device="cpu", znear=0.01, zfar=10.0,
 
         # Extract transform matrix (camera-to-world)
         c2w = torch.tensor(frame['transform_matrix'], dtype=torch.float32, device=device)
-
-        if applied_transform is not None:
-            c2w = applied_transform @ c2w # Apply the global transform
 
         # Convert camera-to-world to PyTorch3D R, T (world-to-camera)
         R_nerf = c2w[:3, :3] # Rotation part of camera-to-world
