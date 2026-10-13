@@ -223,11 +223,10 @@ __marimo__/
 data/*
 #But keep this file so Git can track the 'data' folder
 !data/.gitkeep
-#Ignore all 'output' folder content
-outputs/*
-#But keep this file so Git can track the 'output' folder
+# Ignore outputs, but keep the small result files so the numbers are versioned
+outputs/**
+!outputs/**/
 !outputs/.gitkeep
-#A baseline content
-baseline/intermediate_*.png
-#Ignoring 'baseline/data' since its download automatically on first run
-baseline/data/
+!outputs/**/metrics*.csv
+!outputs/**/loss_history.csv
+!outputs/**/config_used.yaml
